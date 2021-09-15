@@ -36,4 +36,34 @@ class Status
 
         return $this->httpClient->get($endpoint, $payloads, $headers);
     }
+
+    public function checkPaymentStatus(string $paymentId)
+    {
+        $payloads = [];
+        $endpoint = 'payments/' . $paymentId . '/status';
+        $headers = ['Content-Type' => 'application/json'];
+
+        return $this->httpClient->get($endpoint, $payloads, $headers);
+    }
+
+    public function verifyPayment(string $paymentId, string $verificationSignature)
+    {
+        $payloads = [
+            'verification_signature' => $verificationSignature,
+        ];
+
+        $endpoint = 'payments/' . $paymentId . '/verify';
+        $headers = ['Content-Type' => 'application/json'];
+
+        return $this->httpClient->get($endpoint, $payloads, $headers);
+    }
+
+    public function cancelPayment($value='')
+    {
+        $payloads = [];
+        $endpoint = 'payments/' . $paymentId . '/cancel';
+        $headers = ['Content-Type' => 'application/json'];
+
+        return $this->httpClient->get($endpoint, $payloads, $headers);
+    }
 }
