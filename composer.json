@@ -1,0 +1,42 @@
+{
+  "name": "esyede/durianpay-php",
+  "description": "Unofficial Integration Kit for Durianpay.id",
+  "type": "library",
+  "require": {
+    "guzzlehttp/guzzle": "^6.5",
+    "php": ">=7.0.0",
+    "ext-json": "*"
+  },
+  "license": "MIT",
+  "homepage": "https://durianpay.id",
+  "support": {
+    "issues": "https://github.com/esyede/durianpay-php/issues",
+    "source": "https://github.com/esyede/durianpay-php"
+  },
+  "authors": [
+    {
+      "name": "Suyadi",
+      "email": "suyadi.1992@gmail.com"
+    },
+    {
+      "name": "ZerosDev",
+      "email": "admin@zeros.co.id"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Esyede\\DurianPay\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Esyede\\DurianPay\\Laravel\\ServiceProvider"
+      ],
+      "aliases": {
+        "DurianPay": "Esyede\\DurianPay\\Laravel\\Facade"
+      }
+    }
+  }
+}
