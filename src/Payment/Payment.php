@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Esyede\DurianPay\Order;
+namespace Esyede\DurianPay\Payment;
 
 use Esyede\DurianPay\Http\Client as HttpClient;
 
