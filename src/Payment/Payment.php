@@ -39,7 +39,7 @@ class Payment
             'type' => 'EWALLET',
             'request' => [
                 'order_id' => $orderId,
-                'amount' => $amount,
+                'amount' => (string) $amount,
                 'mobile' => $mobile,
                 'wallet_type' => $walletType,
             ],
@@ -59,7 +59,7 @@ class Payment
                 'order_id' => $orderId,
                 'bank_code' => $bankCode,
                 'name' => $name,
-                'amount' => $amount,
+                'amount' => (string) $amount,
             ],
         ];
 
@@ -84,7 +84,7 @@ class Payment
             'type' => 'QRIS', // ????????????
             'request' => [
                 'order_id' => $orderId,
-                'amount' => $amount,
+                'amount' => (string) $amount,
                 'mobile' => $mobile,
                 'wallet_type' => 'QRIS', // ????????????
             ],
