@@ -12,6 +12,7 @@ class Info
     private $mobile;
 
     private $address;
+    private $metadata;
 
     /*
     |--------------------------------------------------------------------------
@@ -46,6 +47,12 @@ class Info
     public function setAddress(Address $address)
     {
         $this->address = $address;
+        return $this;
+    }
+
+    public function setMetadata(Metadata $metadata)
+    {
+        $this->metadata = $metadata;
         return $this;
     }
 
