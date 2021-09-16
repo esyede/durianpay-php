@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Esyede\DurianPay\Order;
 
-use Esyede\DurianPay\Customer\Info;
-use Esyede\DurianPay\Customer\Address;
-use Esyede\DurianPay\Customer\Metadata;
 use Esyede\DurianPay\Http\Client as HttpClient;
 
 class Order
