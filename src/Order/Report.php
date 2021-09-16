@@ -6,6 +6,7 @@ namespace Esyede\DurianPay\Order;
 
 use Esyede\DurianPay\Http\Client as HttpClient;
 use DateTime;
+use DateTimeZone;
 
 class Report
 {
@@ -29,35 +30,21 @@ class Report
     /**
      * Retrieves the details of all payments created.
      *
-     * @param string      $startDate
-     * @param string|null $endDate
+     * @param DateTime      $startDate
+     * @param DateTime|null $endDate
      * @param int         $limit
      * @param int         $skip
      *
      * @return \stdClass|false
      */
-    public function fetchAll(string $startDate, string $endDate = null, int $limit =  25, int $skip = 0)
+    public function fetchAll(DateTime $startDate, DateTime $endDate = null, int $limit =  25, int $skip = 0)
     {
-        $startDate = DateTime::createFromFormat('d-m-Y H:i:s', $startDate);
-
-        if ($startDate === false) {
-            $this->httpClient->addError('Order status fetchAll: invalid startDate');
-            return false;
-        }
-
         if (is_null($endDate)) {
-            $endDate = new DateTime();
-        } else {
-            $endDate = DateTime::createFromFormat('d-m-Y H:i:s', $endDate);
-
-            if ($endDate === false) {
-                $this->httpClient->addError('Order status fetchAll: invalid endDate');
-                return false;
-            }
+            $endDate = new DateTime('now');
         }
 
-        $startDate = $startDate->getTimestamp();
-        $endDate = $endDate->getTimestamp();
+        $startDate = $startDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
+        $endDate = $endDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
 
         if ($startDate > $endDate) {
             $this->httpClient->addError('Order status fetchAll: startDate cannot be greater than endDate');

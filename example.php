@@ -30,10 +30,10 @@ use Esyede\DurianPay\Payment\Report as PaymentReport;
 
 
 // $customer = (new CustomerInfo())
-//     ->setRefId('TRX-221453')
-//     ->setGivenName('Abdul Rofiq')
-//     ->setEmail('abdul.rofiq@gmail.com')
-//     ->setMobile('08521346571')
+//     ->setRefId('TRX-' . random_int(999, 99999))
+//     ->setGivenName('Tripay User')
+//     ->setEmail('tripay.user@gmail.com')
+//     ->setMobile('08521346571323')
 //     ->setAddress($address);
 
 // $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
@@ -53,24 +53,24 @@ use Esyede\DurianPay\Payment\Report as PaymentReport;
 // Orders Fetch all
 // -------------------------------------
 
-// $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
-// $status = new OrderReport($httpClient);
-// print_r($status->fetchAll());
+$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+$status = new OrderReport($httpClient);
+print_r($status->fetchAll(new DateTime()));
 
 
 // Orders Fetch by ID
 // -------------------------------------
 
-$orderId = 'ord_Fv9xOJP8pr3092';
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
-$status = new OrderReport($httpClient);
-print_r($status->fetchById($orderId));
+// $orderId = 'ord_DKUztzeVDQ9608';
+// $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+// $status = new OrderReport($httpClient);
+// print_r($status->fetchById($orderId));
 
 
 // Payments pay with Ewallet
 // -------------------------------------
 
-$orderId = 'ord_JSkeU8Lbdk9565';
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
-$payment = new Payment($httpClient);
-print_r($payment->payEwallet($orderId, 364000, '081234567890', 'DANA'));
+// $orderId = 'ord_JSkeU8Lbdk9565';
+// $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+// $payment = new Payment($httpClient);
+// print_r($payment->payEwallet($orderId, 364000, '081234567890', 'DANA'));
