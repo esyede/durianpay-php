@@ -56,7 +56,8 @@ class Order
     public function create(string $orderRefId, Items $items)
     {
         if ($items->empty()) {
-            throw new Exception('Item is empty.');
+            $this->httpClient->addError('Unable to create order: item is empty.');
+            return false;
         }
 
         $all = $items->all();
