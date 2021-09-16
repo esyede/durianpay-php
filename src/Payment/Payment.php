@@ -5,16 +5,37 @@ declare(strict_types=1);
 namespace Esyede\DurianPay\Payment;
 
 use Esyede\DurianPay\Http\Client as HttpClient;
+use Esyede\DurianPay\Customer\Info as CustomerInfo;
 
 class Payment
 {
+    /**
+     * HTTP requestor client.
+     *
+     * @var HttpClient
+     */
     private $httpClient;
 
+    /**
+     * Constructor.
+     *
+     * @param HttpClient $httpClient
+     */
     public function __construct(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
     }
 
+    /**
+     * Make a payment via Virtual Account.
+     *
+     * @param  string $orderId
+     * @param  string $bankCode
+     * @param  string $name
+     * @param  int    $amount
+     *
+     * @return \stdClass|false
+     */
     public function payVA(string $orderId, string $bankCode, string $name, int $amount)
     {
         $payloads = [
@@ -22,7 +43,7 @@ class Payment
             'request' => [
                 'order_id' => $orderId,
                 'bank_code' => $bankCode,
-                'name' => $name,
+                'name' => $name, // Name Appear in ATM
                 'amount' => (string) $amount,
             ],
         ];
@@ -33,6 +54,16 @@ class Payment
         return $this->httpClient->post($endpoint, $payloads, $headers);
     }
 
+    /**
+     * Make a payment via e-Wallet.
+     *
+     * @param  string $orderId
+     * @param  int    $amount
+     * @param  string $mobile
+     * @param  string $walletType
+     *
+     * @return \stdClass|false
+     */
     public function payEwallet(string $orderId, int $amount, string $mobile, string $walletType)
     {
         $payloads = [
@@ -51,6 +82,17 @@ class Payment
         return $this->httpClient->post($endpoint, $payloads, $headers);
     }
 
+    /**
+     * Make a payment via Retail Store.
+     * Pass 'ALFAMART' or 'INDOMARET' into $bankCode.
+     *
+     * @param  string $orderId
+     * @param  string $bankCode
+     * @param  string $name
+     * @param  int    $amount
+     *
+     * @return \stdClass|false
+     */
     public function payRetailStore(string $orderId, string $bankCode, string $name, int $amount)
     {
         $payloads = [
@@ -70,7 +112,65 @@ class Payment
     }
 
     /**
-     * Payments Charge QRIS (not working!).
+     * Make a payment via Online Banking.
+     *
+     * @param  string       $orderId
+     * @param  string       $type
+     * @param  string       $name
+     * @param  int          $amount
+     * @param  CustomerInfo $customer
+     *
+     * @return \stdClass|false
+     */
+    public function payOnlineBanking(string $orderId, string $type, string $name, int $amount, CustomerInfo $customer)
+    {
+        $endpoint = 'payments/charge';
+        $payloads = [
+            'type' => 'ONLINE_BANKING',
+            'request' => [
+                'order_id' => $orderId,
+                'type' => $type,
+                'amount' => $amount . '.00',
+            ],
+            'customer_info' => [
+                'email' => $customer->getEmail(),
+                'given_name' => $customer->getGivenName(),
+                'id' => $customer->getRefId(), // ?????????
+            ],
+            'mobile' => $customer->getMobile(),
+        ];
+
+        $endpoint = 'payments/charge';
+        $headers = ['Content-Type' => 'application/json'];
+
+        return $this->httpClient->post($endpoint, $payloads, $headers);
+    }
+
+    public function payBcaAggregator(string $orderId, string $name, int $amount, CustomerInfo $customer)
+    {
+        $payloads = [
+            'type' => 'VA',
+            'request' => [
+                'order_id' => $orderId,
+                'bank_code' => 'BCA',
+                'name' => $name, // Name Appear in ATM
+                'amount' => $amount . '.00',
+            ],
+            'customer_info' => [
+                'email' => $customer->getEmail(),
+                'given_name' => $customer->getGivenName(),
+                'id' => $customer->getRefId(),
+            ],
+        ];
+
+        $endpoint = 'payments/charge';
+        $headers = ['Content-Type' => 'application/json'];
+
+        return $this->httpClient->post($endpoint, $payloads, $headers);
+    }
+
+    /**
+     * Payments Charge QRIS (Not Working!!).
      *
      * @param  string $orderId
      * @param  int    $amount
@@ -81,12 +181,12 @@ class Payment
     public function payQris(string $orderId, int $amount, string $mobile)
     {
         $payloads = [
-            'type' => 'QRIS', // ????????????
+            'type' => 'QRIS',
             'request' => [
                 'order_id' => $orderId,
-                'amount' => (string) $amount,
+                'amount' => $amount . '.00',
                 'mobile' => $mobile,
-                'wallet_type' => 'QRIS', // ????????????
+                'type' => 'QRIS',
             ],
         ];
 

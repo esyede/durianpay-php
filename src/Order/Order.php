@@ -10,12 +10,34 @@ use Esyede\DurianPay\Http\Client as HttpClient;
 
 class Order
 {
+    /**
+     * HTTP requestor client.
+     *
+     * @var HttpClient
+     */
     private $httpClient;
 
+    /**
+     * Customer basic info.
+     *
+     * @var CustomerInfo
+     */
     private $customer;
+
+    /**
+     * Customer address info.
+     *
+     * @var CustomerAddress
+     */
     private $address;
 
-
+    /**
+     * Constructor.
+     *
+     * @param HttpClient      $httpClient
+     * @param CustomerInfo    $customer
+     * @param CustomerAddress $address
+     */
     public function __construct(HttpClient $httpClient, CustomerInfo $customer, CustomerAddress $address)
     {
         $this->httpClient = $httpClient;
@@ -23,10 +45,19 @@ class Order
         $this->address = $address;
     }
 
+    /**
+     * Creates an order.
+     *
+     * @param string $orderRefId
+     * @param Items  $items
+     *
+     * @return \stdClass|false
+     */
     public function create(string $orderRefId, Items $items)
     {
         if ($items->empty()) {
-            throw new Exception('Item is empty.');
+            $this->httpClient->addError('Unable to create order: item is empty.');
+            return false;
         }
 
         $all = $items->all();
@@ -71,6 +102,15 @@ class Order
         return $this->httpClient->post($endpoint, $payloads, $headers);
     }
 
+    /**
+     * Create an Instapay link.
+     *
+     * @param int          $amount
+     * @param string       $orderRefId
+     * @param CustomerInfo $customer
+     *
+     * @return \stdClass|false
+     */
     public function createLink(int $amount, string $orderRefId, CustomerInfo $customer)
     {
         $payloads = [

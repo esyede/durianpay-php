@@ -66,159 +66,48 @@ class Client
 
     public function post(string $endpoint, array $params = [], array $headers = [])
     {
-        try {
-            $this->resetError();
-            $this->resetDebug();
-
-            $this->addDebug('URL: '.$this->connector->getConfig('base_uri').'/'.$endpoint);
-            $this->addDebug('Request Method: '.strtoupper(__FUNCTION__));
-            $this->addDebug('Request Params: '.json_encode($params));
-            $this->addDebug('Request Headers: '.json_encode(array_merge($this->connector->getConfig('headers'), $headers)));
-
-            $response = $this->connector->{__FUNCTION__}(ltrim($endpoint, '/'), [
-                'headers' => $headers,
-                'json' => $params,
-            ]);
-
-            $body = $response->getBody()->getContents();
-
-            $this->addDebug('Response HTTP Code: '.$response->getStatusCode());
-            $this->addDebug('Response Header: '.json_encode($response->getHeaders()));
-            $this->addDebug('Response Body: '.$body);
-
-            $data = json_decode($body);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception("Invalid JSON response");
-            }
-
-            return $data;
-        } catch (Exception $e) {
-            $this->addError($e->getMessage());
-            return false;
-        }
+        return $this->request('post', $endpoint, $params, $headers);
     }
 
     public function get($endpoint, array $params = [], array $headers = [])
     {
-        try {
-            $this->resetError();
-            $this->resetDebug();
-
-            $this->addDebug('URL: '.$this->connector->getConfig('base_uri').'/'.$endpoint);
-            $this->addDebug('Request Method: '.strtoupper(__FUNCTION__));
-            $this->addDebug('Request Params: '.json_encode($params));
-            $this->addDebug('Request Headers: '.json_encode(array_merge($this->connector->getConfig('headers'), $headers)));
-
-            $response = $this->connector->{__FUNCTION__}(ltrim($endpoint, '/'), [
-                'headers' => $headers,
-                'form_params' => $params
-            ]);
-
-            $body = $response->getBody()->getContents();
-
-            $this->addDebug('Response HTTP Code: '.$response->getStatusCode());
-            $this->addDebug('Response Header: '.json_encode($response->getHeaders()));
-            $this->addDebug('Response Body: '.$body);
-
-            $data = json_decode($body);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception("Invalid JSON response");
-            }
-
-            return $data;
-        } catch (Exception $e) {
-            $this->addError($e->getMessage());
-            return false;
-        }
+        return $this->request('get', $endpoint, $params, $headers);
     }
 
     public function delete(string $endpoint, array $params = [], array $headers = [])
     {
-        try {
-            $this->resetError();
-            $this->resetDebug();
-
-            $this->addDebug('URL: '.$this->connector->getConfig('base_uri').'/'.$endpoint);
-            $this->addDebug('Request Method: '.strtoupper(__FUNCTION__));
-            $this->addDebug('Request Params: '.json_encode($params));
-            $this->addDebug('Request Headers: '.json_encode(array_merge($this->connector->getConfig('headers'), $headers)));
-
-            $response = $this->connector->{__FUNCTION__}(ltrim($endpoint, '/'), [
-                'headers' => $headers,
-                'json' => $params,
-            ]);
-
-            $body = $response->getBody()->getContents();
-
-            $this->addDebug('Response HTTP Code: '.$response->getStatusCode());
-            $this->addDebug('Response Header: '.json_encode($response->getHeaders()));
-            $this->addDebug('Response Body: '.$body);
-
-            $data = json_decode($body);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception("Invalid JSON response");
-            }
-
-            return $data;
-        } catch (Exception $e) {
-            $this->addError($e->getMessage());
-            return false;
-        }
+        return $this->request('delete', $endpoint, $params, $headers);
     }
 
     public function patch(string $endpoint, array $params = [], array $headers = [])
     {
-        try {
-            $this->resetError();
-            $this->resetDebug();
-
-            $this->addDebug('URL: '.$this->connector->getConfig('base_uri').'/'.$endpoint);
-            $this->addDebug('Request Method: POST');
-            $this->addDebug('Request Params: '.json_encode($params));
-            $this->addDebug('Request Headers: '.json_encode(array_merge($this->connector->getConfig('headers'), $headers)));
-
-            $response = $this->connector->{__FUNCTION__}(ltrim($endpoint, '/'), [
-                'headers' => $headers,
-                'json' => $params,
-            ]);
-
-            $body = $response->getBody()->getContents();
-
-            $this->addDebug('Response HTTP Code: '.$response->getStatusCode());
-            $this->addDebug('Response Header: '.json_encode($response->getHeaders()));
-            $this->addDebug('Response Body: '.$body);
-
-            $data = json_decode($body);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception("Invalid JSON response");
-            }
-
-            return $data;
-        } catch (Exception $e) {
-            $this->addError($e->getMessage());
-            return false;
-        }
+        return $this->request('patch', $endpoint, $params, $headers);
     }
 
     public function put(string $endpoint, array $params = [], array $headers = [])
+    {
+        return $this->request('put', $endpoint, $params, $headers);
+    }
+
+    private function request(string $method, string $endpoint, array $params = [], array $headers = [])
     {
         try {
             $this->resetError();
             $this->resetDebug();
 
             $this->addDebug('URL: '.$this->connector->getConfig('base_uri').'/'.$endpoint);
-            $this->addDebug('Request Method: POST');
+            $this->addDebug('Request Method: '.strtoupper($method));
             $this->addDebug('Request Params: '.json_encode($params));
             $this->addDebug('Request Headers: '.json_encode(array_merge($this->connector->getConfig('headers'), $headers)));
 
-            $response = $this->connector->{__FUNCTION__}(ltrim($endpoint, '/'), [
-                'headers' => $headers,
-                'json' => $params,
-            ]);
+            $method = strtolower($method);
+            $data = ['headers' => $headers, 'json' => $params];
+
+            if ($method === 'get') {
+                $data = ['headers' => $headers, 'form_params' => $params];
+            }
+
+            $response = $this->connector->{$method}(ltrim($endpoint, '/'), $data);
 
             $body = $response->getBody()->getContents();
 
@@ -229,7 +118,7 @@ class Client
             $data = json_decode($body);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception("Invalid JSON response");
+                throw new Exception('Invalid JSON response');
             }
 
             return $data;
