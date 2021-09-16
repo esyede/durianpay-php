@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Esyede\DurianPay\Order;
 
-use Esyede\DurianPay\Customer\Info as CustomerInfo;
-use Esyede\DurianPay\Customer\Address as CustomerAddress;
+use Esyede\DurianPay\Customer\Info;
+use Esyede\DurianPay\Customer\Address;
+use Esyede\DurianPay\Customer\Metadata;
 use Esyede\DurianPay\Http\Client as HttpClient;
 
 class Order
@@ -38,11 +39,12 @@ class Order
      * @param CustomerInfo    $customer
      * @param CustomerAddress $address
      */
-    public function __construct(HttpClient $httpClient, CustomerInfo $customer, CustomerAddress $address)
+    public function __construct(HttpClient $httpClient, Info $customer, Address $address, Metadata $metadata)
     {
         $this->httpClient = $httpClient;
         $this->customer = $customer;
         $this->address = $address;
+        $this->metadata = $metadata;
     }
 
     /**
@@ -69,6 +71,7 @@ class Order
 
         $customer = $this->customer;
         $address = $this->address;
+        $metadata = $this->metadata;
 
         $payloads = [
             'amount' => $amount.'.00',
@@ -94,6 +97,7 @@ class Order
                 ],
             ],
             'items' => $items->all(),
+            'metadata' => $metadata->all(),
         ];
 
         $endpoint = 'orders';
@@ -105,13 +109,13 @@ class Order
     /**
      * Create an Instapay link.
      *
-     * @param int          $amount
      * @param string       $orderRefId
+     * @param int          $amount
      * @param CustomerInfo $customer
      *
      * @return \stdClass|false
      */
-    public function createLink(int $amount, string $orderRefId, CustomerInfo $customer)
+    public function createLink(string $orderRefId, int $amount, CustomerInfo $customer)
     {
         $payloads = [
             'amount' => (string) $amount,

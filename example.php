@@ -8,6 +8,7 @@ use Esyede\DurianPay\Http\Client as HttpClient;
 
 use Esyede\DurianPay\Order\Order;
 use Esyede\DurianPay\Order\Items as OrderItems;
+use Esyede\DurianPay\Order\Metadata as OrderMetadata;
 use Esyede\DurianPay\Order\Report as OrderReport;
 
 use Esyede\DurianPay\Payment\Payment;
@@ -16,34 +17,42 @@ use Esyede\DurianPay\Payment\Report as PaymentReport;
 // Create Orders
 // -------------------------------------
 
-// $address = (new CustomerAddress())
-//     ->setReceiverName('Asep Balon')
-//     ->setReceiverPhone('6281234567890')
-//     ->setLabel('Rumah Asep')
-//     ->setAddressLine1('Jalan Buntu')
-//     ->setAddressLine2('Ngrambe')
-//     ->setCity('Ngawi')
-//     ->setRegion('Jawa Timur')
-//     ->setCountry('Indonesia')
-//     ->setPostalCode('12345')
-//     ->setLandmark('Lampu Merah Ngrambe');
+$address = (new CustomerAddress())
+    ->setReceiverName('Asep Balon')
+    ->setReceiverPhone('6281234567890')
+    ->setLabel('Rumah Asep')
+    ->setAddressLine1('Jalan Buntu')
+    ->setAddressLine2('Ngrambe')
+    ->setCity('Ngawi')
+    ->setRegion('Jawa Timur')
+    ->setCountry('Indonesia')
+    ->setPostalCode('12345')
+    ->setLandmark('Lampu Merah Ngrambe');
 
+$metadata = (new OrderMetadata())
+    ->add('foo', 'bar')
+    ->add('baz', 'qux');
 
-// $customer = (new CustomerInfo())
-//     ->setRefId('TRX-' . random_int(999, 99999))
-//     ->setGivenName('Tripay User')
-//     ->setEmail('tripay.user@gmail.com')
-//     ->setMobile('08521346571323')
-//     ->setAddress($address);
+$customer = (new CustomerInfo())
+    ->setRefId('TRX-' . random_int(999, 99999))
+    ->setGivenName('Tripay User')
+    ->setEmail('tripay.user@gmail.com')
+    ->setMobile('08521346571323')
+    ->setAddress($address)
+    ->setMetadata($metadata);
 
-// $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
-// $order = new Order($httpClient, $customer, $address);
+$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+$order = new Order($httpClient, $customer, $address, $metadata);
+
 // $items = new OrderItems();
-
 // $items->add('Sendal Jepit', 1, 20000, 'https://google.com/image.png')
 //     ->add('Sepatu Kuda', 6, 50000, 'https://google.com/image.png')
 //     ->add('Es Batu', 12, 2000, 'https://google.com/image.png')
 //     ->add('Bakso Cup', 4, 5000, 'https://google.com/image.png');
+
+// Create payment link (instapay)
+$result = $order->createLink('TRX-999999', 20000, $customer);
+print_r($result);
 
 
 // $result = $order->create('TRX-123456', $items);
@@ -53,9 +62,9 @@ use Esyede\DurianPay\Payment\Report as PaymentReport;
 // Orders Fetch all
 // -------------------------------------
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
-$status = new OrderReport($httpClient);
-print_r($status->fetchAll(new DateTime()));
+// $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+// $status = new OrderReport($httpClient);
+// print_r($status->fetchAll(new DateTime()));
 
 
 // Orders Fetch by ID
