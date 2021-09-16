@@ -32,8 +32,8 @@ class Report
      *
      * @param DateTime      $startDate
      * @param DateTime|null $endDate
-     * @param int         $limit
-     * @param int         $skip
+     * @param int           $limit
+     * @param int           $skip
      *
      * @return \stdClass|false
      */
