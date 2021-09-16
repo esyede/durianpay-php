@@ -54,7 +54,7 @@ use Esyede\DurianPay\Order\Status;
 // print_r($status->fetchAll());
 
 
-$orderId = 'ord_Fv9xOJP8pr3092';
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
-$status = new Status($httpClient);
-print_r($status->fetchById($orderId));
+// $orderId = 'ord_Fv9xOJP8pr3092';
+// $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+// $status = new Status($httpClient);
+// print_r($status->fetchById($orderId));
