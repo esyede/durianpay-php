@@ -95,10 +95,10 @@ $payment =  new Payment($httpClient);
 
 // ===== Online Banking [ERROR!]
 
-// $orderId = 'ord_vfHbGHMRRU0355'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
+// $orderId = 'ord_VzPG4plyy51022'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
 // $type = 'JENIUSPAY';
 // $name = 'Asep Balon'; // Name Appear in ATM
-// $amount = 10000; // Sesuaikan dengan amount milik orderId
+// $amount = 10001; // Sesuaikan dengan amount milik orderId
 // $customer = (new CustomerInfo())
 //     ->setEmail('asep.balon@gmail.com')
 //     ->setGivenName('Asep Balon')
@@ -166,7 +166,7 @@ $payment =  new Payment($httpClient);
 |--------------------------------------------------------------------------
 */
 
-$paymentId = 'pay_sample_ko3nBxnz0U2933';
+$paymentId = 'pay_grrbDdbWYu9117';
 $response = $report->cancelPayment($paymentId);
 
-var_dump($response); die;
+var_dump($httpClient->debugs); die;
