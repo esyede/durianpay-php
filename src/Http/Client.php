@@ -203,7 +203,7 @@ class Client
 
             if ($method === 'get') {
                 $endpoint = $endpoint.'?'.http_build_query($params);
-                $data = ['headers' => $headers];
+                unset($data['json']);
             }
 
             $response = $this->connector->{$method}(ltrim($endpoint, '/'), $data);

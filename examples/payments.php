@@ -28,12 +28,12 @@ $endDate = new DateTime('now + 2 days', new DateTimeZone('Asia/Jakarta'));
 
 
 // ===== Fetch all with start date, end date, limit, skip --> limit dari durianpay gak jalan?
-$limit = 30;
-$skip = 10;
+// $limit = 30;
+// $skip = 10;
 
-$response = $report->fetchAll($startDate, $endDate, $limit, $skip);
+// $response = $report->fetchAll($startDate, $endDate, $limit, $skip);
 
-print_r($response); die;
+// print_r($response); die;
 
 
 /*
@@ -127,8 +127,8 @@ $payment =  new Payment($httpClient);
 
 // ===== QRIS
 
-// $orderId = 'ord_Z82kAhOytU1845'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
-// $amount = 10000; // Sesuaikan dengan amount milik orderId
+// $orderId = 'ord_wUj30mpheQ5293'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
+// $amount = 20000; // Sesuaikan dengan amount milik orderId
 // $mobile = '081234567890';
 
 // $response = $payment->payQris($orderId, $amount, $mobile);
