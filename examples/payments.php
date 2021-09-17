@@ -102,7 +102,7 @@ $amount = 10000; // Sesuaikan dengan amount milik orderId
 $customer = (new CustomerInfo())
     ->setEmail('asep.balon@gmail.com')
     ->setGivenName('Asep Balon')
-    ->setMobile('085338340449')
+    ->setMobile('081234567890')
     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
 $response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
@@ -118,7 +118,6 @@ print_r($httpClient->debugs); die;
 // $customer = (new CustomerInfo())
 //     ->setEmail('asep.balon@gmail.com')
 //     ->setGivenName('Asep Balon')
-//     ->setEmail('asep.balon@gmail.com')
 //     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
 // $response = $payment->payBcaAggregator($orderId, $name, $amount, $customer);

@@ -100,7 +100,7 @@ class Payment
             'request' => [
                 'order_id' => $orderId,
                 'bank_code' => $bankCode,
-                'name' => $name,
+                'name' => $name, // Name Appear in ATM
                 'amount' => (string) $amount,
             ],
         ];
@@ -155,11 +155,11 @@ class Payment
                 'bank_code' => 'BCA',
                 'name' => $name, // Name Appear in ATM
                 'amount' => $amount . '.00',
-            ],
-            'customer_info' => [
-                'email' => $customer->getEmail(),
-                'given_name' => $customer->getGivenName(),
-                'id' => $customer->getCustomerId(),
+                'customer_info' => [
+                    'email' => $customer->getEmail(),
+                    'given_name' => $customer->getGivenName(),
+                    'id' => $customer->getCustomerId(),
+                ],
             ],
         ];
 
