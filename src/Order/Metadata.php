@@ -14,17 +14,38 @@ class Metadata
     private $items = [];
 
     /**
-     * Add an item.
+     * Set an item.
      *
-     * @param string $name
-     * @param int    $qty
-     * @param int    $price
-     * @param string $logoUrl
+     * @param string $key
+     * @param mixed  $value
      */
-    public function add(string $key, $value)
+    public function set(string $key, $value)
     {
-        $this->items[] = [$key => $value];
+        $this->items[$key] = $value;
         return $this;
+    }
+
+    /**
+     * Get an item.
+     *
+     * @param string $key
+     * @param mixed  $default
+     *
+     * @return mixed
+     */
+    public function get(string $key, $default = null)
+    {
+        return isset($this->items[$key]) ? $this->items[$key] : $default;
+    }
+
+    /**
+     * Remove an item.
+     *
+     * @param string $key
+     */
+    public function forget(string $key)
+    {
+        unset($this->items[$key]);
     }
 
     /**

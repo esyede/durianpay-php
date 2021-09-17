@@ -5,13 +5,37 @@ declare(strict_types=1);
 namespace Esyede\DurianPay\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
+use Exception;
 
 class Client
 {
+    /**
+     * Turn debugging on/off.
+     *
+     * @var bool
+     */
     public $debug = false;
+
+    /**
+     * Debug messages bag.
+     *
+     * @var array
+     */
     public $debugs = [];
+
+    /**
+     * Error messages bag.
+     *
+     * @var array
+     */
     public $errors = [];
 
+    /**
+     * Constructor.
+     *
+     * @param string $clientSecret
+     * @param bool   $debug
+     */
     public function __construct(string $clientSecret, bool $debug = false)
     {
         $this->clientSecret = $clientSecret;
@@ -29,6 +53,11 @@ class Client
         $this->connector = new GuzzleClient($configs);
     }
 
+    /**
+     * Add a debug message.
+     *
+     * @param string $message
+     */
     public function addDebug(string $message)
     {
         if ($this->debug) {
@@ -38,6 +67,11 @@ class Client
         return $this;
     }
 
+    /**
+     * Add an error message.
+     *
+     * @param string $message
+     */
     public function addError(string $message)
     {
         $this->errors[] = [
@@ -47,6 +81,11 @@ class Client
         return $this;
     }
 
+    /**
+     * Check if there is error message exists.
+     *
+     * @return bool
+     */
     public function hasError()
     {
         return count($this->errors) > 0;
@@ -58,37 +97,96 @@ class Client
         return $this;
     }
 
+    /**
+     * Reset debug messages.
+     *
+     * @return self
+     */
     public function resetDebug()
     {
         $this->debugs = [];
         return $this;
     }
 
+    /**
+     * Do a POST request.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param array  $headers
+     *
+     * @return \stdClass|false
+     */
     public function post(string $endpoint, array $params = [], array $headers = [])
     {
         return $this->request('post', $endpoint, $params, $headers);
     }
 
+    /**
+     * Do a GET request.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param array  $headers
+     *
+     * @return \stdClass|false
+     */
     public function get($endpoint, array $params = [], array $headers = [])
     {
         return $this->request('get', $endpoint, $params, $headers);
     }
 
+    /**
+     * Do a DELETE request.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param array  $headers
+     *
+     * @return \stdClass|false
+     */
     public function delete(string $endpoint, array $params = [], array $headers = [])
     {
         return $this->request('delete', $endpoint, $params, $headers);
     }
 
+    /**
+     * Do a PATCH request.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param array  $headers
+     *
+     * @return \stdClass|false
+     */
     public function patch(string $endpoint, array $params = [], array $headers = [])
     {
         return $this->request('patch', $endpoint, $params, $headers);
     }
 
+    /**
+     * Do a PUT request.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param array  $headers
+     *
+     * @return \stdClass|false
+     */
     public function put(string $endpoint, array $params = [], array $headers = [])
     {
         return $this->request('put', $endpoint, $params, $headers);
     }
 
+    /**
+     * Do a http request.
+     *
+     * @param string $endpoint
+     * @param array  $params
+     * @param array  $headers
+     *
+     * @return \stdClass|false
+     */
     private function request(string $method, string $endpoint, array $params = [], array $headers = [])
     {
         try {

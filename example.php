@@ -30,8 +30,8 @@ $address = (new CustomerAddress())
     ->setLandmark('Lampu Merah Ngrambe');
 
 $metadata = (new OrderMetadata())
-    ->add('foo', 'bar')
-    ->add('baz', 'qux');
+    ->set('foo', 'bar')
+    ->set('baz', 'qux');
 
 $customer = (new CustomerInfo())
     ->setRefId('TRX-' . random_int(999, 99999))

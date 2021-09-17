@@ -203,6 +203,6 @@ class Disbursement
             'bank_code' => $bankCode,
         ];
 
-        return $this->httpClient->delete($endpoint, $payloads, $headers);
+        return $this->httpClient->post($endpoint, $payloads, $headers);
     }
 }
