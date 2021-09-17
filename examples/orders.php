@@ -10,7 +10,6 @@ use Esyede\DurianPay\Order\Metadata;
 use Esyede\DurianPay\Order\Order;
 use Esyede\DurianPay\Order\Report;
 
-
 /*
 |--------------------------------------------------------------------------
 | Create Order API
