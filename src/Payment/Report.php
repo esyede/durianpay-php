@@ -127,6 +127,6 @@ class Report
         $endpoint = 'payments/' . $paymentId . '/cancel';
         $headers = ['Content-Type' => 'application/json'];
 
-        return $this->httpClient->get($endpoint, $payloads, $headers);
+        return $this->httpClient->put($endpoint, $payloads, $headers);
     }
 }

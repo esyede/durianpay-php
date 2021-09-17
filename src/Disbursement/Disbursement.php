@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Esyede\DurianPay\Disbursement;
 
+use Esyede\DurianPay\Http\Client as HttpClient;
+
 class Disbursement
 {
     /**
@@ -54,7 +56,7 @@ class Disbursement
             'amount' => (string) $amount,
         ];
 
-        return $this->httpClient->get($endpoint, $payloads, $headers);
+        return $this->httpClient->post($endpoint, $payloads, $headers);
     }
 
     /**
