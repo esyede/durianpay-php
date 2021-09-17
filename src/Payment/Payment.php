@@ -29,10 +29,10 @@ class Payment
     /**
      * Make a payment via Virtual Account.
      *
-     * @param  string $orderId
-     * @param  string $bankCode
-     * @param  string $name
-     * @param  int    $amount
+     * @param string $orderId
+     * @param string $bankCode
+     * @param string $name
+     * @param int    $amount
      *
      * @return \stdClass|false
      */
@@ -57,10 +57,10 @@ class Payment
     /**
      * Make a payment via e-Wallet.
      *
-     * @param  string $orderId
-     * @param  int    $amount
-     * @param  string $mobile
-     * @param  string $walletType
+     * @param string $orderId
+     * @param int    $amount
+     * @param string $mobile
+     * @param string $walletType
      *
      * @return \stdClass|false
      */
@@ -86,10 +86,10 @@ class Payment
      * Make a payment via Retail Store.
      * Pass 'ALFAMART' or 'INDOMARET' into $bankCode.
      *
-     * @param  string $orderId
-     * @param  string $bankCode
-     * @param  string $name
-     * @param  int    $amount
+     * @param string $orderId
+     * @param string $bankCode
+     * @param string $name
+     * @param int    $amount
      *
      * @return \stdClass|false
      */
@@ -114,11 +114,11 @@ class Payment
     /**
      * Make a payment via Online Banking.
      *
-     * @param  string       $orderId
-     * @param  string       $type
-     * @param  string       $name
-     * @param  int          $amount
-     * @param  CustomerInfo $customer
+     * @param string       $orderId
+     * @param string       $type
+     * @param string       $name
+     * @param int          $amount
+     * @param CustomerInfo $customer
      *
      * @return \stdClass|false
      */
@@ -172,9 +172,9 @@ class Payment
     /**
      * Payments Charge QRIS (Not Working!!).
      *
-     * @param  string $orderId
-     * @param  int    $amount
-     * @param  string $mobile
+     * @param string $orderId
+     * @param int    $amount
+     * @param string $mobile
      *
      * @return \stdClass|false
      */
