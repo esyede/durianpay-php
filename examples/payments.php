@@ -83,7 +83,7 @@ $payment =  new Payment($httpClient);
 
 // ===== Retail Store
 
-// $orderId = 'ord_h3tN3XJhev5695'; // ord_M7TC6XXk0A8123, ord_oKspCZtSLI2245, ord_h3tN3XJhev5695
+// $orderId = 'ord_Et6n80VC8R3115'; // ord_M7TC6XXk0A8123, ord_oKspCZtSLI2245, ord_h3tN3XJhev5695
 // $bankCode = 'ALFAMART'; // Isi dengan ALFAMART atau INDOMARET
 // $name = 'Asep Balon'; // Name Appear in ATM
 // $amount = 31500; // Sesuaikan dengan amount milik orderId
@@ -95,19 +95,19 @@ $payment =  new Payment($httpClient);
 
 // ===== Online Banking [ERROR!]
 
-$orderId = 'ord_vfHbGHMRRU0355'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
-$type = 'JENIUSPAY';
-$name = 'Asep Balon'; // Name Appear in ATM
-$amount = 10000; // Sesuaikan dengan amount milik orderId
-$customer = (new CustomerInfo())
-    ->setEmail('asep.balon@gmail.com')
-    ->setGivenName('Asep Balon')
-    ->setMobile('081234567890')
-    ->setCustomerId('cus_ZYG4hzWUMh4686');
+// $orderId = 'ord_vfHbGHMRRU0355'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
+// $type = 'JENIUSPAY';
+// $name = 'Asep Balon'; // Name Appear in ATM
+// $amount = 10000; // Sesuaikan dengan amount milik orderId
+// $customer = (new CustomerInfo())
+//     ->setEmail('asep.balon@gmail.com')
+//     ->setGivenName('Asep Balon')
+//     ->setMobile('081234567890')
+//     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
-$response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
+// $response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
 
-print_r($httpClient->debugs); die;
+// print_r($httpClient->debugs); die;
 
 
 // ===== BCA Aggregator
@@ -127,7 +127,7 @@ print_r($httpClient->debugs); die;
 
 // ===== QRIS
 
-// $orderId = 'ord_kKyNzqQnGA8499'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
+// $orderId = 'ord_Z82kAhOytU1845'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
 // $amount = 10000; // Sesuaikan dengan amount milik orderId
 // $mobile = '081234567890';
 

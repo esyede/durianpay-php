@@ -114,7 +114,7 @@ class Report
         $endpoint = 'payments/' . $paymentId . '/verify';
         $headers = ['Content-Type' => 'application/json'];
 
-        return $this->httpClient->get($endpoint, $payloads, $headers);
+        return $this->httpClient->post($endpoint, $payloads, $headers);
     }
 
     /**
