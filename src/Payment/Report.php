@@ -52,14 +52,17 @@ class Report
         $limit = ($limit < 1) ? 1 : $limit;
         $skip = ($skip < 0) ? 0 : $skip;
 
-        $payloads = [
+        $queries = [
             'from' => $startDate,
-            'to' => $endDate,
+            // 'to' => $endDate, // Kalo ada 'to' data gak keluar.
             'limit' => $limit,
             'skip' => $skip,
         ];
 
-        $endpoint = 'payments';
+        $queries = http_build_query($queries);
+
+        $endpoint = 'payments?' . $queries;
+        $payloads = [];
         $headers = ['Content-Type' => 'application/json'];
 
         return $this->httpClient->get($endpoint, $payloads, $headers);

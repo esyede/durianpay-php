@@ -28,12 +28,12 @@ $endDate = new DateTime('now + 2 days', new DateTimeZone('Asia/Jakarta'));
 
 
 // ===== Fetch all with start date, end date, limit, skip --> limit dari durianpay gak jalan?
-// $limit = 30;
-// $skip = 10;
+$limit = 30;
+$skip = 10;
 
-// $response = $report->fetchAll($startDate, $endDate, $limit, $skip);
+$response = $report->fetchAll($startDate, $endDate, $limit, $skip);
 
-// print_r($response); die;
+print_r($response); die;
 
 
 /*
@@ -95,19 +95,19 @@ $payment =  new Payment($httpClient);
 
 // ===== Online Banking [ERROR!]
 
-$orderId = 'ord_vfHbGHMRRU0355'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
-$type = 'JENIUSPAY';
-$name = 'Asep Balon'; // Name Appear in ATM
-$amount = 10000; // Sesuaikan dengan amount milik orderId
-$customer = (new CustomerInfo())
-    ->setEmail('asep.balon@gmail.com')
-    ->setGivenName('Asep Balon')
-    ->setMobile('081234567890')
-    ->setCustomerId('cus_ZYG4hzWUMh4686');
+// $orderId = 'ord_vfHbGHMRRU0355'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
+// $type = 'JENIUSPAY';
+// $name = 'Asep Balon'; // Name Appear in ATM
+// $amount = 10000; // Sesuaikan dengan amount milik orderId
+// $customer = (new CustomerInfo())
+//     ->setEmail('asep.balon@gmail.com')
+//     ->setGivenName('Asep Balon')
+//     ->setMobile('081234567890')
+//     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
-$response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
+// $response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
 
-print_r($response); die;
+// print_r($response); die;
 
 
 // ===== BCA Aggregator
@@ -134,3 +134,39 @@ print_r($response); die;
 // $response = $payment->payQris($orderId, $amount, $mobile);
 
 // print_r($response); die;
+
+
+/*
+|--------------------------------------------------------------------------
+| Check Payments Status API
+|--------------------------------------------------------------------------
+*/
+
+// $paymentId = 'pay_psvnEzKzOe5331'; // completed
+// $response = $report->checkPaymentStatus($paymentId);
+
+// print_r($response); die;
+
+/*
+|--------------------------------------------------------------------------
+| Verify Payments API
+|--------------------------------------------------------------------------
+*/
+
+// $paymentId = 'pay_psvnEzKzOe5331'; // started
+// $verificationSignature = '15bf648d8d03a84e17a6c0402044443994d9434777791bd6be00b1eeac598ae4';
+// $response = $report->verifyPayment($paymentId, $verificationSignature);
+
+// print_r($response); die;
+
+
+/*
+|--------------------------------------------------------------------------
+| Cancel Payment API
+|--------------------------------------------------------------------------
+*/
+
+$paymentId = 'pay_sample_ko3nBxnz0U2933';
+$response = $report->cancelPayment($paymentId);
+
+var_dump($response); die;

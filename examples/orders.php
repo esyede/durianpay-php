@@ -3,8 +3,8 @@
 require '../vendor/autoload.php';
 
 use Esyede\DurianPay\Http\Client as HttpClient;
-use Esyede\DurianPay\Customer\Info as CustomerInfo;
-use Esyede\DurianPay\Customer\Address as CustomerAddress;
+use Esyede\DurianPay\Customer\Info;
+use Esyede\DurianPay\Customer\Address;
 use Esyede\DurianPay\Order\Items;
 use Esyede\DurianPay\Order\Metadata;
 use Esyede\DurianPay\Order\Order;
@@ -18,7 +18,7 @@ use Esyede\DurianPay\Order\Report;
 
 $httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
 
-$address = (new CustomerAddress())
+$address = (new Address())
     ->setReceiverName('Asep Balon')
     ->setReceiverPhone('6281234567890')
     ->setLabel('Rumah Asep')
@@ -30,11 +30,11 @@ $address = (new CustomerAddress())
     ->setPostalCode('12345')
     ->setLandmark('Lampu Merah Ngrambe');
 
-$metadata = (new OrderMetadata())
+$metadata = (new Metadata())
     ->set('foo', 'bar')
     ->set('baz', 'qux');
 
-$customer = (new CustomerInfo())
+$customer = (new Info())
     ->setRefId('TRX-' . random_int(999, 99999))
     ->setGivenName('Tripay User')
     ->setEmail('tripay.user@gmail.com')
@@ -46,7 +46,7 @@ $order = new Order($httpClient, $customer, $address, $metadata);
 
 $orderRefId = 'TRX-00000001';
 
-$items = new OrderItems();
+$items = new Items();
 $items->add('Sendal Jepit', 1, 20000, 'https://google.com/image.png')
     ->add('Sepatu Kuda', 6, 50000, 'https://google.com/image.png')
     ->add('Es Batu', 12, 2000, 'https://google.com/image.png')
@@ -67,7 +67,7 @@ $report = new Report($httpClient);
 
 // Fetch all with start date, end date
 $startDate = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
-$startDate = new DateTime('now + 2 days', new DateTimeZone('Asia/Jakarta'));
+$endDate = new DateTime('now + 2 days', new DateTimeZone('Asia/Jakarta'));
 
 $response = $report->fetchAll($startDate, $endDate);
 
