@@ -14,7 +14,7 @@ use Esyede\DurianPay\Payment\Report;
 |--------------------------------------------------------------------------
 */
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ', true);
 
 $report = new Report($httpClient);
 
@@ -102,12 +102,12 @@ $amount = 10000; // Sesuaikan dengan amount milik orderId
 $customer = (new CustomerInfo())
     ->setEmail('asep.balon@gmail.com')
     ->setGivenName('Asep Balon')
-    ->setEmail('asep.balon@gmail.com')
+    ->setMobile('085338340449')
     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
 $response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
 
-print_r($response); die;
+print_r($httpClient->debugs); die;
 
 
 // ===== BCA Aggregator
