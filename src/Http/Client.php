@@ -199,13 +199,14 @@ class Client
             $this->addDebug('Request Headers: '.json_encode(array_merge($this->connector->getConfig('headers'), $headers)));
 
             $method = strtolower($method);
-            $data = ['headers' => $headers, 'json' => $params];
+            $payloads = ['headers' => $headers, 'json' => $params];
 
             if ($method === 'get') {
-                $data = ['headers' => $headers, 'form_params' => $params];
+                $endpoint = $endpoint . '?' . http_build_query($params);
+                $payloads = [];
             }
 
-            $response = $this->connector->{$method}(ltrim($endpoint, '/'), $data);
+            $response = $this->connector->{$method}(ltrim($endpoint, '/'), $payloads);
 
             $body = $response->getBody()->getContents();
 
@@ -216,7 +217,8 @@ class Client
             $data = json_decode($body);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception('Invalid JSON response');
+                $this->addError('Unable to parse: invalid JSON response');
+                return false;
             }
 
             return $data;

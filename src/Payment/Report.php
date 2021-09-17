@@ -35,14 +35,11 @@ class Report
      *
      * @return \stdClass|false
      */
-    public function fetchAll(DateTime $startDate, DateTime $endDate = null, int $limit =  25, int $skip = 0)
+    public function fetchAll(DateTime $startDate, DateTime $endDate = null, int $limit = 25, int $skip = 0)
     {
-        if (is_null($endDate)) {
-            $endDate = new DateTime('now');
-        }
-
-        $startDate = $startDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
+        $endDate = is_null($endDate) ? new DateTime('now') : $endDate;
         $endDate = $endDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
+        $startDate = $startDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
 
         if ($startDate > $endDate) {
             $this->httpClient->addError('Payment report fetchAll: startDate cannot be greater than endDate');
@@ -52,17 +49,14 @@ class Report
         $limit = ($limit < 1) ? 1 : $limit;
         $skip = ($skip < 0) ? 0 : $skip;
 
-        $queries = [
+        $payloads = [
             'from' => $startDate,
             // 'to' => $endDate, // Kalo ada 'to' data gak keluar.
             'limit' => $limit,
             'skip' => $skip,
         ];
 
-        $queries = http_build_query($queries);
-
-        $endpoint = 'payments?' . $queries;
-        $payloads = [];
+        $endpoint = 'payments';
         $headers = ['Content-Type' => 'application/json'];
 
         return $this->httpClient->get($endpoint, $payloads, $headers);
@@ -127,7 +121,7 @@ class Report
      *
      * @return \stdClass|false
      */
-    public function cancelPayment($value='')
+    public function cancelPayment(string $paymentId)
     {
         $payloads = [];
         $endpoint = 'payments/' . $paymentId . '/cancel';

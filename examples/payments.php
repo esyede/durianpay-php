@@ -28,12 +28,12 @@ $endDate = new DateTime('now + 2 days', new DateTimeZone('Asia/Jakarta'));
 
 
 // ===== Fetch all with start date, end date, limit, skip --> limit dari durianpay gak jalan?
-$limit = 30;
-$skip = 10;
+// $limit = 30;
+// $skip = 10;
 
-$response = $report->fetchAll($startDate, $endDate, $limit, $skip);
+// $response = $report->fetchAll($startDate, $endDate, $limit, $skip);
 
-print_r($response); die;
+// print_r($response); die;
 
 
 /*
