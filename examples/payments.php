@@ -8,7 +8,6 @@ use Esyede\DurianPay\Customer\Address as CustomerAddress;
 use Esyede\DurianPay\Payment\Payment;
 use Esyede\DurianPay\Payment\Report;
 
-
 /*
 |--------------------------------------------------------------------------
 | Payments Fetch API
