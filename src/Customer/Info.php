@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Esyede\DurianPay\Customer;
 
+use Esyede\DurianPay\Order\Metadata;
+
 class Info
 {
     private $refId;

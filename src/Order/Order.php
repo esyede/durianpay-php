@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Esyede\DurianPay\Order;
 
 use Esyede\DurianPay\Http\Client as HttpClient;
+use Esyede\DurianPay\Customer\Info;
+use Esyede\DurianPay\Customer\Address;
 
 class Order
 {
@@ -112,7 +114,7 @@ class Order
      *
      * @return \stdClass|false
      */
-    public function createLink(string $orderRefId, int $amount, CustomerInfo $customer)
+    public function createLink(string $orderRefId, int $amount, Info $customer)
     {
         $payloads = [
             'amount' => (string) $amount,
