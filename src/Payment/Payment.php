@@ -131,13 +131,13 @@ class Payment
                 'order_id' => $orderId,
                 'type' => $type,
                 'amount' => $amount . '.00',
+                'customer_info' => [
+                    'email' => $customer->getEmail(),
+                    'given_name' => $customer->getGivenName(),
+                    'id' => $customer->getCustomerId(),
+                ],
+                'mobile' => $customer->getMobile(),
             ],
-            'customer_info' => [
-                'email' => $customer->getEmail(),
-                'given_name' => $customer->getGivenName(),
-                'id' => $customer->getCustomerId(),
-            ],
-            'mobile' => $customer->getMobile(),
         ];
 
         $endpoint = 'payments/charge';
@@ -155,11 +155,11 @@ class Payment
                 'bank_code' => 'BCA',
                 'name' => $name, // Name Appear in ATM
                 'amount' => $amount . '.00',
-            ],
-            'customer_info' => [
-                'email' => $customer->getEmail(),
-                'given_name' => $customer->getGivenName(),
-                'id' => $customer->getCustomerId(),
+                'customer_info' => [
+                    'email' => $customer->getEmail(),
+                    'given_name' => $customer->getGivenName(),
+                    'id' => $customer->getCustomerId(),
+                ],
             ],
         ];
 

@@ -103,7 +103,7 @@ $amount = 10000; // Sesuaikan dengan amount milik orderId
 $customer = (new CustomerInfo())
     ->setEmail('asep.balon@gmail.com')
     ->setGivenName('Asep Balon')
-    ->setEmail('asep.balon@gmail.com')
+    ->setMobile('081234567890')
     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
 $response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
