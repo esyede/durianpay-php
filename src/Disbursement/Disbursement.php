@@ -66,7 +66,7 @@ class Disbursement
      *
      * @return \stdClass|false
      */
-    public function fetchTopUpDetailById(string $topUpId)
+    public function fetchTopUpDetailsById(string $topUpId)
     {
         $endpoint = 'disbursements/topup/' . $topUpId;
         $headers = ['Content-Type' => 'application/json'];

@@ -38,7 +38,7 @@ $disbursement = new Disbursement($httpClient);
 */
 
 // $topUpId = ''; // Bingung dapet dari mana.
-// $response = $disbursement->fetchTopUpDetailById($topUpId);
+// $response = $disbursement->fetchTopUpDetailsById($topUpId);
 
 // print_r($response);
 
