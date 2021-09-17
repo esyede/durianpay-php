@@ -51,9 +51,9 @@ $disbursement = new Disbursement($httpClient);
 */
 
 // ERROR: merchant not configured properly with a provider in database. Please ensure is_active = TRUE
-$response = $disbursement->fetchDurianPayBalance();
+// $response = $disbursement->fetchDurianPayBalance();
 
-print_r($response);
+// print_r($response);
 
 
 /*
@@ -62,3 +62,17 @@ print_r($response);
 |--------------------------------------------------------------------------
 */
 
+// $name = 'Disbursement 1';
+// $description = 'Test disbursement 1';
+
+// $items = (new Items())
+//     ->add('Account 1', 'BRI', 100000, '1111111', 'account1@gmail.com', '0852111111', 'Untuk account 1')
+//     ->add('Account 2', 'BRI', 200000, '2222222', 'account2@gmail.com', '0852222222', 'Untuk account 2')
+//     ->add('Account 3', 'BRI', 300000, '3333333', 'account3@gmail.com', '0852333333', 'Untuk account 3');
+
+// $idempotencyKey = 'DISBTRX-00001';
+// $forceDisburse = false;
+
+// $response = $disbursement->submitDisbursement($name, $description, $items, $idempotencyKey, $forceDisburse);
+
+// print_r($response);
