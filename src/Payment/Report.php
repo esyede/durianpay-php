@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Esyede\DurianPay\Payment;
 
 use Esyede\DurianPay\Http\Client as HttpClient;
+use DateTime;
+use DateTimeZone;
 
 class Report
 {
@@ -33,12 +35,29 @@ class Report
      *
      * @return \stdClass|false
      */
-    public function fetchAll(int $limit = 50, int $skip = 0)
+    public function fetchAll(DateTime $startDate, DateTime $endDate = null, int $limit =  25, int $skip = 0)
     {
+        if (is_null($endDate)) {
+            $endDate = new DateTime('now');
+        }
+
+        $startDate = $startDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
+        $endDate = $endDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
+
+        if ($startDate > $endDate) {
+            $this->httpClient->addError('Payment report fetchAll: startDate cannot be greater than endDate');
+            return false;
+        }
+
         $limit = ($limit < 1) ? 1 : $limit;
         $skip = ($skip < 0) ? 0 : $skip;
 
-        $payloads = compact('limit', 'skip');
+        $payloads = [
+            'from' => $startDate,
+            'to' => $endDate,
+            'limit' => $limit,
+            'skip' => $skip,
+        ];
 
         $endpoint = 'payments';
         $headers = ['Content-Type' => 'application/json'];

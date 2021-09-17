@@ -10,6 +10,7 @@ class Info
     private $givenName;
     private $email;
     private $mobile;
+    private $customerId;
 
     private $address;
     private $metadata;
@@ -41,6 +42,12 @@ class Info
     public function setMobile(string $mobile)
     {
         $this->mobile = $mobile;
+        return $this;
+    }
+
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
         return $this;
     }
 
@@ -82,6 +89,11 @@ class Info
         return $this->mobile;
     }
 
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
     public function getAddress()
     {
         return $this->address;
@@ -94,6 +106,7 @@ class Info
             'given_name' => $this->getGivenName(),
             'email' => $this->getEmail(),
             'mobile' => $this->getMobile(),
+            'id' => $this->getCustomerId(),
         ];
     }
 }

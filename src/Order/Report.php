@@ -47,7 +47,7 @@ class Report
         $endDate = $endDate->setTimezone(new DateTimeZone('Asia/Jakarta'))->getTimestamp();
 
         if ($startDate > $endDate) {
-            $this->httpClient->addError('Order status fetchAll: startDate cannot be greater than endDate');
+            $this->httpClient->addError('Order report fetchAll: startDate cannot be greater than endDate');
             return false;
         }
 

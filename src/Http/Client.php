@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Esyede\DurianPay\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
+use Exception;
 
 class Client
 {

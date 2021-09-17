@@ -135,7 +135,7 @@ class Payment
             'customer_info' => [
                 'email' => $customer->getEmail(),
                 'given_name' => $customer->getGivenName(),
-                'id' => $customer->getRefId(), // ?????????
+                'id' => $customer->getCustomerId(),
             ],
             'mobile' => $customer->getMobile(),
         ];
@@ -159,7 +159,7 @@ class Payment
             'customer_info' => [
                 'email' => $customer->getEmail(),
                 'given_name' => $customer->getGivenName(),
-                'id' => $customer->getRefId(),
+                'id' => $customer->getCustomerId(),
             ],
         ];
 
@@ -170,7 +170,7 @@ class Payment
     }
 
     /**
-     * Payments Charge QRIS (Not Working!!).
+     * Make a payment via QRIS.
      *
      * @param string $orderId
      * @param int    $amount
