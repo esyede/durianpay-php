@@ -118,7 +118,6 @@ print_r($response); die;
 // $customer = (new CustomerInfo())
 //     ->setEmail('asep.balon@gmail.com')
 //     ->setGivenName('Asep Balon')
-//     ->setEmail('asep.balon@gmail.com')
 //     ->setCustomerId('cus_ZYG4hzWUMh4686');
 
 // $response = $payment->payBcaAggregator($orderId, $name, $amount, $customer);

@@ -100,7 +100,7 @@ class Payment
             'request' => [
                 'order_id' => $orderId,
                 'bank_code' => $bankCode,
-                'name' => $name,
+                'name' => $name, // Name Appear in ATM
                 'amount' => (string) $amount,
             ],
         ];
