@@ -138,7 +138,7 @@ class Address
         return $this->landmark;
     }
 
-    public function toArray()
+    public function all()
     {
         return [
             'receiver_name' => $this->getReceiverName(),

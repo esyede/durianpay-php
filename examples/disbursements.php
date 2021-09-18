@@ -15,9 +15,19 @@ $disbursement = new Disbursement($httpClient);
 |--------------------------------------------------------------------------
 */
 
-// $response = $disbursement->fetchBankLists();
+$response = $disbursement->fetchBankLists();
 
-// print_r($response);
+
+$data =  '-----+-----------+--------------------------' . PHP_EOL;
+$data .= 'ID   | CODE      |  BANK NAME               ' . PHP_EOL;
+$data .= '-----+-----------+--------------------------' . PHP_EOL;
+foreach ($response->data as $key => $value) {
+    $data .= $value->id . '   ' . $value->code . '   ' . $value->name.PHP_EOL;
+}
+
+file_put_contents('banks.txt', $data);
+
+print_r($response);
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +36,9 @@ $disbursement = new Disbursement($httpClient);
 */
 
 // ERROR: top-up not allowed in sandbox mode (Code: DPAY_INTERNAL_ERROR)
-// $response = $disbursement->topUp(16, 100000);
+$response = $disbursement->topUp(16, 100000);
 
-// print_r($response);
+print_r($response);
 
 
 /*
@@ -37,10 +47,10 @@ $disbursement = new Disbursement($httpClient);
 |--------------------------------------------------------------------------
 */
 
-// $topUpId = ''; // Bingung dapet dari mana.
-// $response = $disbursement->fetchTopUpDetailsById($topUpId);
+$topUpId = ''; // Bingung dapet dari mana.
+$response = $disbursement->fetchTopUpDetailsById($topUpId);
 
-// print_r($response);
+print_r($response);
 
 
 /*
@@ -61,84 +71,17 @@ $disbursement = new Disbursement($httpClient);
 |--------------------------------------------------------------------------
 */
 
-// $name = 'Testing disbursement';
-// $description = 'Testing';
+$name = 'Disbursement 1';
+$description = 'Test disbursement 1';
 
-// $accountOwnerName = 'Nama Penerima';
-// $bankCode = 'bri';
-// $amount = 10000;
-// $accountNumber = '1234567890123';
-// $emailRecipient = 'recipient@disbursement.com';
-// $phoneNumber = '081234567890';
-// $notes = 'Catatan transfer';
-// $idempotencyKey = uniqid();
-// $forceDisburse = false;
+$items = (new Items())
+    ->add('Account 1', 'BRI', 100000, '1111111', 'account1@gmail.com', '0852111111', 'Untuk account 1')
+    ->add('Account 2', 'BRI', 200000, '2222222', 'account2@gmail.com', '0852222222', 'Untuk account 2')
+    ->add('Account 3', 'BRI', 300000, '3333333', 'account3@gmail.com', '0852333333', 'Untuk account 3');
 
-// $items = new Items();
-// $items->add($accountOwnerName, $bankCode, $amount, $accountNumber, $emailRecipient, $phoneNumber, $notes);
+$idempotencyKey = 'DISBTRX-00001';
+$forceDisburse = false;
 
-// $response = $disbursement->submitDisbursement($name, $description, $items, $idempotencyKey, $forceDisburse);
+$response = $disbursement->submitDisbursement($name, $description, $items, $idempotencyKey, $forceDisburse);
 
-// print_r($response);
-
-/*
-|--------------------------------------------------------------------------
-| Approve Disbursement API
-|--------------------------------------------------------------------------
-*/
-
-// $disbursementId = 'ugfhfhfh';
-// $ignoreInvalid = true;
-
-// $response = $disbursement->approveDisbursement($disbursementId, $ignoreInvalid);
-
-// print_r($response);
-
-/*
-|--------------------------------------------------------------------------
-| Fetch disbursement items by ID API
-|--------------------------------------------------------------------------
-*/
-
-// $disbursementId = 'ugfhfhfh';
-
-// $response = $disbursement->fetchDisbursementItemsById($disbursementId);
-
-// print_r($response);
-
-/*
-|--------------------------------------------------------------------------
-| Fetch disbursement by ID API
-|--------------------------------------------------------------------------
-*/
-
-// $disbursementId = 'ugfhfhfh';
-
-// $response = $disbursement->fetchDisbursementById($disbursementId);
-
-// print_r($response);
-
-/*
-|--------------------------------------------------------------------------
-| Delete disbursement API
-|--------------------------------------------------------------------------
-*/
-
-// $disbursementId = 'ugfhfhfh';
-
-// $response = $disbursement->deleteDisbursementById($disbursementId);
-
-// print_r($response);
-
-/*
-|--------------------------------------------------------------------------
-| Validate API
-|--------------------------------------------------------------------------
-*/
-
-// $accountNumber = '1234567890123';
-// $bankCode = 'bri';
-
-// $response = $disbursement->validateAccount($accountNumber, $bankCode);
-
-// print_r($response);
+print_r($response);
