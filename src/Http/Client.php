@@ -227,4 +227,14 @@ class Client
             return false;
         }
     }
+
+    /**
+     * Get http client instance.
+     *
+     * @return [type]
+     */
+    public function getInstance()
+    {
+        return $this;
+    }
 }

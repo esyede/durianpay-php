@@ -101,7 +101,7 @@ class Info
         return $this->address;
     }
 
-    public function toArray()
+    public function all()
     {
         return [
             'customer_ref_id' => $this->getRefId(),

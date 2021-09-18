@@ -35,7 +35,7 @@
         "Esyede\\DurianPay\\Laravel\\ServiceProvider"
       ],
       "aliases": {
-        "DurianPay": "Esyede\\DurianPay\\Laravel\\Facade"
+        "DurianPayClient": "Esyede\\DurianPay\\Laravel\\Facade"
       }
     }
   }
