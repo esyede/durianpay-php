@@ -82,22 +82,28 @@ class Order
                 'given_name' => $customer->getGivenName(),
                 'email' => $customer->getEmail(),
                 'mobile' => $customer->getMobile(),
-                'address' => [
-                    'receiver_name' => $address->getReceiverName(),
-                    'receiver_phone' => $address->getReceiverPhone(),
-                    'label' => $address->getLabel(),
-                    'address_line_1' => $address->getAddressLine1(),
-                    'address_line_2' => $address->getAddressLine2(),
-                    'city' => $address->getCity(),
-                    'region' => $address->getRegion(),
-                    'country' => $address->getCountry(),
-                    'postal_code' => $address->getPostalCode(),
-                    'landmark' => $address->getLandmark(),
-                ],
             ],
             'items' => $items->all(),
-            'metadata' => $metadata->all(),
         ];
+
+        if (! is_null($address)) {
+            $payloads['customer']['address'] =  [
+                'receiver_name' => $address->getReceiverName(),
+                'receiver_phone' => $address->getReceiverPhone(),
+                'label' => $address->getLabel(),
+                'address_line_1' => $address->getAddressLine1(),
+                'address_line_2' => $address->getAddressLine2(),
+                'city' => $address->getCity(),
+                'region' => $address->getRegion(),
+                'country' => $address->getCountry(),
+                'postal_code' => $address->getPostalCode(),
+                'landmark' => $address->getLandmark(),
+            ];
+        }
+
+        if (! is_null($metadata)) {
+            $payloads['metadata'] = $metadata->all();
+        }
 
         $endpoint = 'orders';
         $headers = ['Content-Type' => 'application/json'];
