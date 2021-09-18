@@ -6,7 +6,7 @@ use Esyede\DurianPay\Http\Client as HttpClient;
 use Esyede\DurianPay\Disbursement\Disbursement;
 use Esyede\DurianPay\Disbursement\Items;
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ', true);
 $disbursement = new Disbursement($httpClient);
 
 /*
@@ -60,9 +60,9 @@ print_r($response);
 */
 
 // ERROR: merchant not configured properly with a provider in database. Please ensure is_active = TRUE
-$response = $disbursement->fetchDurianPayBalance();
+// $response = $disbursement->fetchDurianPayBalance();
 
-print_r($response);
+// print_r($response);
 
 
 /*

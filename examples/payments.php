@@ -14,7 +14,7 @@ use Esyede\DurianPay\Payment\Report;
 |--------------------------------------------------------------------------
 */
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ', true);
 
 $report = new Report($httpClient);
 
@@ -166,7 +166,7 @@ print_r($response); die;
 |--------------------------------------------------------------------------
 */
 
-$paymentId = 'pay_sample_ko3nBxnz0U2933';
+$paymentId = 'pay_grrbDdbWYu9117';
 $response = $report->cancelPayment($paymentId);
 
-var_dump($response); die;
+var_dump($httpClient->debugs); die;

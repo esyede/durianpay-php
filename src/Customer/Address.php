@@ -13,6 +13,7 @@ class Address
     private $addressLine2;
     private $city;
     private $region;
+    private $country;
     private $postalCode;
     private $landmark;
 

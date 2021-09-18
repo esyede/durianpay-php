@@ -38,7 +38,7 @@ class Order
      * @param CustomerInfo    $customer
      * @param CustomerAddress $address
      */
-    public function __construct(HttpClient $httpClient, Info $customer, Address $address, Metadata $metadata)
+    public function __construct(HttpClient $httpClient, Info $customer, Address $address = null, Metadata $metadata = null)
     {
         $this->httpClient = $httpClient;
         $this->customer = $customer;
