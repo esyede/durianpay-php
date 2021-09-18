@@ -127,13 +127,13 @@ $payment =  new Payment($httpClient);
 
 // ===== QRIS
 
-// $orderId = 'ord_wUj30mpheQ5293'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
-// $amount = 20000; // Sesuaikan dengan amount milik orderId
-// $mobile = '081234567890';
+$orderId = 'ord_wUj30mpheQ5293'; // ord_hZjaQodudZ1364, ord_kKyNzqQnGA8499
+$amount = 20000; // Sesuaikan dengan amount milik orderId
+$mobile = '081234567890';
 
-// $response = $payment->payQris($orderId, $amount, $mobile);
+$response = $payment->payQris($orderId, $amount, $mobile);
 
-// print_r($response); die;
+print_r($response); die;
 
 
 /*
