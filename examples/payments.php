@@ -24,7 +24,8 @@ $endDate = new DateTime('now + 2 days', new DateTimeZone('Asia/Jakarta'));
 
 $response = $report->fetchAll($startDate, $endDate);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 // ===== Fetch all with start date, end date, limit, skip --> limit dari durianpay gak jalan?
@@ -33,7 +34,8 @@ $skip = 10;
 
 $response = $report->fetchAll($startDate, $endDate, $limit, $skip);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 /*
@@ -45,7 +47,8 @@ print_r($response); die;
 $orderId = 'pay_psvnEzKzOe5331';
 $response = $report->fetchById($orderId);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 /*
@@ -66,7 +69,8 @@ $amount = 77000; // Sesuaikan dengan amount milik orderId
 
 $response = $payment->payVa($orderId, $bankCode, $name, $amount);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 // ===== E-Wallet
@@ -78,7 +82,8 @@ $walletType = 'DANA';
 
 $response = $payment->payEwallet($orderId, $amount, $mobile, $walletType);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 // ===== Retail Store
@@ -90,7 +95,8 @@ $amount = 31500; // Sesuaikan dengan amount milik orderId
 
 $response = $payment->payRetailStore($orderId, $bankCode, $name, $amount);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 // ===== Online Banking [ERROR!]
@@ -107,7 +113,8 @@ $customer = (new CustomerInfo())
 
 $response = $payment->payOnlineBanking($orderId, $type, $name, $amount, $customer);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 // ===== BCA Aggregator
@@ -122,7 +129,8 @@ $customer = (new CustomerInfo())
 
 $response = $payment->payBcaAggregator($orderId, $name, $amount, $customer);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 // ===== QRIS
@@ -133,7 +141,8 @@ $mobile = '081234567890';
 
 $response = $payment->payQris($orderId, $amount, $mobile);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 /*
@@ -145,7 +154,8 @@ print_r($response); die;
 $paymentId = 'pay_psvnEzKzOe5331'; // completed
 $response = $report->checkPaymentStatus($paymentId);
 
-print_r($response); die;
+print_r($response);
+die;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,7 +167,8 @@ $paymentId = 'pay_psvnEzKzOe5331'; // started
 $verificationSignature = '15bf648d8d03a84e17a6c0402044443994d9434777791bd6be00b1eeac598ae4';
 $response = $report->verifyPayment($paymentId, $verificationSignature);
 
-print_r($response); die;
+print_r($response);
+die;
 
 
 /*
@@ -169,4 +180,5 @@ print_r($response); die;
 $paymentId = 'pay_grrbDdbWYu9117';
 $response = $report->cancelPayment($paymentId);
 
-var_dump($httpClient->debugs); die;
+var_dump($httpClient->debugs);
+die;
