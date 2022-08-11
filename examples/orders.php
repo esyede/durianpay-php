@@ -16,7 +16,7 @@ use Esyede\DurianPay\Order\Report;
 |--------------------------------------------------------------------------
 */
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ');
+$httpClient = new HttpClient('your_api_key');
 
 $address = (new Address())
     ->setReceiverName('Asep Balon')

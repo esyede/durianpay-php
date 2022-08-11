@@ -6,7 +6,7 @@ use Esyede\DurianPay\Http\Client as HttpClient;
 use Esyede\DurianPay\Disbursement\Disbursement;
 use Esyede\DurianPay\Disbursement\Items;
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ', true);
+$httpClient = new HttpClient('your_api_key', true);
 $disbursement = new Disbursement($httpClient);
 
 /*

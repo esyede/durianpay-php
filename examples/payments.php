@@ -14,7 +14,7 @@ use Esyede\DurianPay\Payment\Report;
 |--------------------------------------------------------------------------
 */
 
-$httpClient = new HttpClient('dp_test_pfVvaBXtciKwmlTQ', true);
+$httpClient = new HttpClient('your_api_key', true);
 
 $report = new Report($httpClient);
 
